@@ -49,7 +49,8 @@ final class ShoppingCartTests: XCTestCase {
         // Calculate final price with 10% discount
         let expectedDiscount = min((1000 + 500) * 0.10, 50)
         let expectedFinalPrice = (1000 + 500) - expectedDiscount
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should reflect 10% discount up to max of $50.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should reflect 10% discount up to max of $50.")
     }
     
     func testApplyCouponDiscountWithLimit() {
@@ -64,7 +65,8 @@ final class ShoppingCartTests: XCTestCase {
         // Calculate final price with 20% discount up to $30
         let expectedDiscount = min((1000 + 500) * 0.20, 30)
         let expectedFinalPrice = (1000 + 500) - expectedDiscount
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should reflect 20% discount up to max of $30.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should reflect 20% discount up to max of $30.")
     }
     
     func testApplyCouponBeyondUsageLimit() {
@@ -81,7 +83,8 @@ final class ShoppingCartTests: XCTestCase {
         // Verify discount is only applied once
         let expectedDiscount = min((1000 + 500) * 0.20, 30)
         let expectedFinalPrice = (1000 + 500) - expectedDiscount
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should reflect only the first discount application.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should reflect only the first discount application.")
     }
     
     func testApplyMultipleCoupons() {
@@ -102,7 +105,8 @@ final class ShoppingCartTests: XCTestCase {
         let secondDiscount = min(total * 0.20, 30)  // 20% up to $30
         let expectedFinalPrice = total - (firstDiscount + secondDiscount)
         
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should reflect combined discounts of multiple coupons.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should reflect combined discounts of multiple coupons.")
     }
     
     func testCannotApplySameCouponTwice() {
@@ -120,7 +124,8 @@ final class ShoppingCartTests: XCTestCase {
         // Verify only one discount is applied
         let expectedDiscount = min((1000 + 500) * 0.10, 50)
         let expectedFinalPrice = (1000 + 500) - expectedDiscount
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should only reflect the first application of the coupon.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should only reflect the first application of the coupon.")
     }
     
     func testNoDiscountWhenCouponExceedsMaxDiscountLimit() {
@@ -132,7 +137,8 @@ final class ShoppingCartTests: XCTestCase {
         XCTAssertTrue(isApplied, "Coupon should be applied successfully.")
         
         // Expected discount should cap at $25, but since total is $10, no discount should be applied
-        XCTAssertEqual(cart.calculateFinalPrice(), 10.0, "Final price should be unaffected as discount cap exceeds cart total.")
+        XCTAssertEqual(cart.calculateFinalPrice(), 10.0,
+                       "Final price should be unaffected as discount cap exceeds cart total.")
     }
     
     func testCalculateFinalPriceAfterRemovingItem() {
@@ -150,7 +156,8 @@ final class ShoppingCartTests: XCTestCase {
         
         let expectedDiscount = min(80 * 0.10, 50)  // Recalculates the discount based on remaining item
         let expectedFinalPrice = 80 - expectedDiscount
-        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice, accuracy: 0.01, "Final price should reflect updated discount after item removal.")
+        XCTAssertEqual(cart.calculateFinalPrice(), expectedFinalPrice,
+                       accuracy: 0.01, "Final price should reflect updated discount after item removal.")
     }
 
     func testCouponUsageLimitAcrossMultipleCarts() {
